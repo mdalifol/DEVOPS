@@ -318,16 +318,6 @@ centos/nginx-110-centos7 Platform for running nginx 1.10 or building … 0
 
 
 [réferences commande docker search](https://docs.docker.com/engine/reference/commandline/search/)
-
-* Par exemple, l'image « nginx ». « nginx » étant l'image d'une application de type serveur Web ou serveur proxy, qui est une application open source.
-* La colonne **NAME** nous donne le **nom de l'image**.
- * Si nous avons un nom sans préfixe, ça veut dire que l'image est associée à un éditeur, que c'est une image officielle, et elle se trouve sur ce qu'on appelle le namespace [root].
- * Si l'image est précédée par un identifiant, cet identifiant est l'identifiant d'un user ou d'une organisation qui propose l'image.
-* La colonne **DESCRIPTION** donne la **description de l'image (tronquée)**
- * pour pouvoir afficher les images avec une description non tronquée on va rajouter l'option `––no-trunc`.
-* La colonne **STARS** donne la **renommée de l'image**.
-* La colonne **OFFICIAL** pour voir **si l'image est officielle**:  **[OK]**
-* La colonne **AUTOMATED** pour savoir **si l'image est générée de manière automatique** grâce à un gestionnaire de code source, par exemple GitHub ou BitBucket.
 	 * Par exemple, l'image « nginx ». « nginx » étant l'image d'une application de type serveur Web ou serveur proxy, qui est une application open source.
 	 * La colonne **NAME** nous donne le **nom de l'image**.
 		 * Si nous avons un nom sans préfixe, ça veut dire que l'image est associée à un éditeur, que c'est une image officielle, et elle se trouve sur ce qu'on appelle le namespace [root].
@@ -337,7 +327,6 @@ centos/nginx-110-centos7 Platform for running nginx 1.10 or building … 0
 	 * La colonne **STARS** donne la **renommée de l'image**.
 	 * La colonne **OFFICIAL** pour voir **si l'image est officielle**:  **[OK]**
 	 * La colonne **AUTOMATED** pour savoir **si l'image est générée de manière automatique** grâce à un gestionnaire de code source, par exemple GitHub ou BitBucket.
-
 
 
 3. Pour **télécharger une image**, la commande `docker pull <nomImage>`
@@ -371,7 +360,7 @@ docker.io/library/nginx:latest
 4. Pour **supprimer une image**, la commande  `docker rmi <nomImage>`
 
 ```docker
-dali@Mac ~ % docker images
+dali@MacBookProDali ~ % docker images
 REPOSITORY 					TAG 				IMAGE ID 		CREATED  			SIZE
 nginx  						latest  			7ce4f91ef623 	14 hours ago 		133MB
 docker/getting-started 		latest  			3ba8f2ff0727 	13 days ago  		27.9MB
@@ -379,7 +368,7 @@ hello-world  				latest  			d1165f221234 	3 weeks ago  		13.3kB
 docker/desktop-kubernetes 	kubernetes-v1.19.7 	93b3398dbfde 	8 weeks ago 		285MB
 
 
-dali@Mac ~ % docker rmi nginx
+dali@MacBookProDali ~ % docker rmi nginx
 Untagged: nginx:latest
 Untagged: nginx@sha256:bae781e7f518e0fb02245140c97e6ddc9f5fcf6aecc043dd9d17e33aec81c832
 Deleted: sha256:7ce4f91ef623b9672ec12302c4a710629cd542617c1ebc616a48d06e2a84656a
@@ -390,7 +379,7 @@ Deleted: sha256:cdb66505811b778bf0ea0cb7df0b5d4424a92bdb9a3ec281b087d70aad16deee
 Deleted: sha256:8f72638764ada0022a461b1194683aacbec0eb0defe9f8cb1c0e46d0a1758671
 Deleted: sha256:346fddbbb0ff19bdb026afb053df490c0c73981a8a985882cf8ee3d716735e87
 
-dali@Mac ~ % docker images
+dali@MacBookProDali ~ % docker images
 REPOSITORY  				TAG 				IMAGE ID 		CREATED 				SIZE
 docker/getting-started  	latest  			3ba8f2ff0727 	13 days ago 			27.9MB
 hello-world 				latest  			d1165f221234 	3 weeks ago 			13.3kB
@@ -412,15 +401,15 @@ docker/desktop-kubernetes 	kubernetes-v1.19.7 	93b3398dbfde 	8 weeks ago 			285M
 > Il n'y a aucun conteneur en exécution, mais avec l'option `-a`: `docker ps -a`, **nous voyons tous les conteneurs qui ont existés, ont été utilisés**.
 
 ```docker
-dali@Mac ~ % docker ps
+dali@MacBookProDali ~ % docker ps
 CONTAINER ID IMAGE COMMAND CREATED STATUS  PORTS NAMES
 
-dali@Mac ~ % docker ps -a
+dali@MacBookProDali ~ % docker ps -a
 CONTAINER 		ID IMAGE  				COMMAND  				CREATED  		STATUS 							PORTS  				NAMES
 ad3f9c9481d3 	hello-world  			"/hello" 				25 minutes ago 	Exited (0) 16 minutes ago 							sad_rhodes
 243160e0a79b 	docker/getting-started 	"/docker-entrypoint.…" 	27 minutes ago 	Exited (255) 9 minutes ago 		0.0.0.0:80->80/tcp 	serene_greider
 
-dali@Mac ~ % docker rmi hello-world
+dali@MacBookProDali ~ % docker rmi hello-world
 Error response from daemon: conflict: unable to remove repository reference "hello-world" (must force) - container ad3f9c9481d3 is using its referenced image d1165f221234
 ```
 
@@ -428,18 +417,18 @@ Error response from daemon: conflict: unable to remove repository reference "hel
 > Par contre, il reste une trace au niveau du disque. Pour supprimer une image qui est utilisée ou référencée par un conteneur, même s'il est terminé, **il faut forcer la suppression de l'image**: `docker rmi -f <nomImage>`
 > **Attention**: on ne force pas la suppression d'une image si elle est utilisée par un conteneur qui doit redémarrer.
 ```docker
-dali@Mac ~ % docker images
+dali@MacBookProDali ~ % docker images
 REPOSITORY 					TAG 		IMAGE ID 			CREATED 			SIZE
 docker/getting-started 		latest  	3ba8f2ff0727 		13 days ago 		27.9MB
 hello-world  				latest  	d1165f221234 		3 weeks ago 		13.3kB
 
 
-dali@Mac ~ % docker rmi -f hello-world
+dali@MacBookProDali ~ % docker rmi -f hello-world
 Untagged: hello-world:latest
 Untagged: hello-world@sha256:308866a43596e83578c7dfa15e27a73011bdd402185a84c5cd7f32a88b501a24
 Deleted: sha256:d1165f2212346b2bab48cb01c1e39ee8ad1be46b87873d9ca7a4e434980a7726
 
-dali@Mac ~ % docker images
+dali@MacBookProDali ~ % docker images
 REPOSITORY 					TAG 		IMAGE ID 			CREATED 			SIZE
 docker/getting-started 		latest  	3ba8f2ff0727 		13 days ago 		27.9MB
 ```
@@ -523,26 +512,26 @@ Il existe **2 cycles de vie de conteneur** différents :
 	**`docker run -it --rm <nomImage>:<tag>`**, _tag_ est en général _latest_
 
 ```docker
-dali@Mac ~ % docker ps -a
+dali@MacBookProDali ~ % docker ps -a
 CONTAINER ID 				IMAGE  				COMMAND  			CREATED  				STATUS  								PORTS  					NAMES
 ad3f9c9481d3 				d1165f221234 		"/hello" 			2 days ago 				Exited (0) 2 days ago  											sad_rhodes
 243160e0a79b 			docker/getting-started 	"/docker-ent…" 		2 days ago 				Exited (255) 2 days ago 				0.0.0.0:80->80/tcp 		serene_greider
 
-dali@Mac ~ % docker run -it --rm alpine
+dali@MacBookProDali ~ % docker run -it --rm alpine
 / # hostname
 70dc4a7bb0b4
 / # exit
 
-dali@Mac ~ % docker ps -a
+dali@MacBookProDali ~ % docker ps -a
 CONTAINER ID 				IMAGE  				COMMAND  			CREATED  				STATUS  								PORTS  					NAMES
 ad3f9c9481d3 				d1165f221234 		"/hello" 			2 days ago 				Exited (0) 2 days ago  											sad_rhodes
 243160e0a79b 			docker/getting-started 	"/docker-ent…" 		2 days ago 				Exited (255) 2 days ago 				0.0.0.0:80->80/tcp 		serene_greiderr
 
-dali@Mac ~ % docker run -it alpine
+dali@MacBookProDali ~ % docker run -it alpine
 / # hostname
 5be6e07e4cfd
 
-dali@Mac ~ % docker ps -a
+dali@MacBookProDali ~ % docker ps -a
 CONTAINER ID 				IMAGE  				COMMAND  			CREATED  				STATUS  								PORTS  					NAMES
 5be6e07e4cfd 				alpine 				"/bin/sh"  			10 seconds ago 			Exited (0) 2 seconds ago  										zen_banach
 ad3f9c9481d3 				d1165f221234 		"/hello" 			2 days ago 				Exited (0) 2 days ago  											sad_rhodes
@@ -575,7 +564,7 @@ Le noyau reste toujours celui sur lequel nous avons installé Docker, ici CentOS
 	* Alors, qu'est-ce qu'on va faire ?
 
 ```docker
-dali@Mac ~ % docker run ubuntu
+dali@MacBookProDali ~ % docker run ubuntu
 Unable to find image 'ubuntu:latest' locally
 latest: Pulling from library/ubuntu
 a70d879fa598: Pull complete
@@ -600,10 +589,10 @@ Status: Downloaded newer image for ubuntu:latest
 		* Le **nom du conteneur**. Les conteneurs vont avoir des noms aléatoires. Un conteneur qui exécute une application de type service doit avoir un nom spécifique et aussi, un hostname spécifique: il faudra donc les nommer spécifiquement.
 
 ```docker
-dali@Mac ~ % docker ps
+dali@MacBookProDali ~ % docker ps
 CONTAINER ID IMAGE COMMAND CREATED STATUS  PORTS NAMES
 
-dali@Mac ~ % docker ps -a
+dali@MacBookProDali ~ % docker ps -a
 CONTAINER ID 				IMAGE  				COMMAND  			CREATED  				STATUS  								PORTS  					NAMES
 54e4aac3a363 				ubuntu 				"/bin/bash"  		2 minutes ago  			Exited (0) 2 minutes ago 										keen_maxwell
 5be6e07e4cfd 				alpine 				"/bin/sh"  			10 seconds ago 			Exited (0) 2 seconds ago  										zen_banach
@@ -618,13 +607,13 @@ Le mode interactif avec processus bash qui s'exécute au niveau du conteneur.
 * Exécuter la commande bash avec ubuntu.
 
 ```docker
-dali@Mac ~ % docker run -it ubuntu
+dali@MacBookProDali ~ % docker run -it ubuntu
 root@c1c43fcdb5ed:/# hostname
 c1c43fcdb5ed
 root@c1c43fcdb5ed:/# exit
 exit
 
-dali@Mac ~ % docker ps -a
+dali@MacBookProDali ~ % docker ps -a
 CONTAINER ID 				IMAGE  				COMMAND  			CREATED  				STATUS  								PORTS  					NAMES
 c1c43fcdb5ed 				ubuntu 				"/bin/bash"  		23 seconds ago 			Exited (0) 8 seconds ago 										funny_mcnulty
 54e4aac3a363 				ubuntu 				"/bin/bash"  		2 minutes ago  			Exited (0) 2 minutes ago 										keen_maxwell
@@ -667,13 +656,13 @@ Lorsqu'on lance `docker run`, on a quelques options supplémentaires.
 >  On vérifie par `docker ps -a` que le conteneur qu'on vient de lancer s'appelle bien cont01 et qu'il y a été arrêté il y a quelques secondes.
 
 ```docker
-dali@Mac ~ % docker run --name=cont01 --hostname=host01 -it ubuntu
+dali@MacBookProDali ~ % docker run --name=cont01 --hostname=host01 -it ubuntu
 root@host01:/# hostname
 host01
 root@host01:/# exit
 exit
 
-dali@Mac ~ % docker ps -a
+dali@MacBookProDali ~ % docker ps -a
 CONTAINER ID 		IMAGE  		COMMAND  			CREATED  			STATUS 						PORTS  			NAMES
 f04576a1e72b 		ubuntu 		"/bin/bash"  		52 seconds ago 		Exited (127) 5 seconds ago  				cont01
 ```
@@ -696,7 +685,7 @@ CentOS s'est lancé avec la commande `ping`.
 La commande ping est en train de s'exécuter en mode arrière-plan.
 
 ```docker
-dali@Mac ~ % docker run -it --name=cont02 --hostname=host02 centos ping 127.0.0.1
+dali@MacBookProDali ~ % docker run -it --name=cont02 --hostname=host02 centos ping 127.0.0.1
 Unable to find image 'centos:latest' locally
 latest: Pulling from library/centos
 7a0437f04f83: Pull complete
@@ -708,7 +697,7 @@ PING 127.0.0.1 (127.0.0.1) 56(84) bytes of data.
 64 bytes from 127.0.0.1: icmp_seq=2 ttl=64 time=0.079 ms
 64 bytes from 127.0.0.1: icmp_seq=3 ttl=64 time=0.074 ms
 
-dali@Mac ~ % docker ps -a
+dali@MacBookProDali ~ % docker ps -a
 CONTAINER ID 		IMAGE  		COMMAND  			CREATED  			STATUS 						PORTS  			NAMES
 e26d2a83a200 		centos 		"ping 127.0.0.1" 	About a minute ago 	Up 1 minute   								cont02
 f04576a1e72b 		ubuntu 		"/bin/bash"  		52 seconds ago 		Exited (127) 5 seconds ago  				cont01
@@ -723,7 +712,7 @@ f04576a1e72b 		ubuntu 		"/bin/bash"  		52 seconds ago 		Exited (127) 5 seconds a
 > **Attention, `logs` n'a rien à voir avec les journaux ou les logs des systèmes**,
 
 ```docker
-dali@Mac ~ % docker logs e26d2a83a200
+dali@MacBookProDali ~ % docker logs e26d2a83a200
 PING 127.0.0.1 (127.0.0.1) 56(84) bytes of data.
 64 bytes from 127.0.0.1: icmp_seq=1 ttl=64 time=0.031 ms
 64 bytes from 127.0.0.1: icmp_seq=2 ttl=64 time=0.079 ms
@@ -743,7 +732,7 @@ Pour passer en mode avant-plan ou en mode attaché, nous utilisons la commande `
 En mode attaché et nous voyons la sortie standard de la commande ping.
 
 ```docker
-dali@Mac ~ % docker attach e26d2a83a200
+dali@MacBookProDali ~ % docker attach e26d2a83a200
 64 bytes from 127.0.0.1: icmp_seq=1004 ttl=64 time=0.031 ms
 64 bytes from 127.0.0.1: icmp_seq=1005 ttl=64 time=0.079 ms
 64 bytes from 127.0.0.1: icmp_seq=1006 ttl=64 time=0.074 ms
@@ -754,7 +743,7 @@ Pour pouvoir passer du mode attaché au mode détaché, on utilise la combinaiso
 On appelle, une **read escape sequence**. C'est la manière "propre" de se détacher d'un container en le laissant fonctionner en arrière plan.
 
 ```docker
-dali@Mac ~ % docker attach e26d2a83a200
+dali@MacBookProDali ~ % docker attach e26d2a83a200
 64 bytes from 127.0.0.1: icmp_seq=1034 ttl=64 time=0.031 ms
 read escape sequence
 ```
@@ -769,7 +758,7 @@ Faisons un `docker ps`, le conteneur n'est plus en fonctionnement
 Faisons un `docker ps -a`, nous observons que le conteneur s'est arrêté.
 
 ```docker
-dali@Mac ~ % docker attach e26d2a83a200
+dali@MacBookProDali ~ % docker attach e26d2a83a200
 64 bytes from 127.0.0.1: icmp_seq=1004 ttl=64 time=0.031 ms
 64 bytes from 127.0.0.1: icmp_seq=1005 ttl=64 time=0.079 ms
 64 bytes from 127.0.0.1: icmp_seq=1006 ttl=64 time=0.074 ms
@@ -778,18 +767,18 @@ dali@Mac ~ % docker attach e26d2a83a200
 3 packets transmitted, 6 received, 0% packet loss, time 109ms
 rtt min/avg/max/mdev = 0.031/0.064/0.079/0.018 ms
 
-dali@Mac ~ % docker ps
+dali@MacBookProDali ~ % docker ps
 CONTAINER ID 		IMAGE  		COMMAND  			CREATED  			STATUS 						PORTS  			NAMES
 e26d2a83a200 		centos 		"ping 127.0.0.1" 	About a minute ago 	Up 10 minutes   							cont02
 
-dali@Mac ~ % docker attach e26d2a83a200
+dali@MacBookProDali ~ % docker attach e26d2a83a200
 64 bytes from 127.0.0.1: icmp_seq=1034 ttl=64 time=0.031 ms
 read escape sequence
 
-dali@Mac ~ % docker ps
+dali@MacBookProDali ~ % docker ps
 CONTAINER ID  IMAGE  COMMAND CREATED STATUS	PORTS  NAMES
 
-dali@Mac ~ % docker ps -a
+dali@MacBookProDali ~ % docker ps -a
 CONTAINER ID 		IMAGE  		COMMAND  			CREATED  			STATUS 						PORTS  			NAMES
 e26d2a83a200 		centos 		"ping 127.0.0.1" 	About a minute ago 	Exited (127) 1 second ago   				cont02
 ```
@@ -820,7 +809,7 @@ C'est du **mapping de port**.
 * Nous voyons que la commande `curl` fonctionne, donc, le serveur est disponible.
 
 ```docker
-dali@Mac ~ % docker run -d -P nginx
+dali@MacBookProDali ~ % docker run -d -P nginx
 Unable to find image 'nginx:latest' locally
 latest: Pulling from library/nginx
 75646c2fb410: Pull complete
@@ -833,11 +822,11 @@ Digest: sha256:bae781e7f518e0fb02245140c97e6ddc9f5fcf6aecc043dd9d17e33aec81c832
 Status: Downloaded newer image for nginx:latest
 99c28791e53aa8b1ace06ee600201b60cddd494068335de4d878952b309c9f7e
 
-dali@Mac ~ % docker ps
+dali@MacBookProDali ~ % docker ps
 CONTAINER ID 		IMAGE 		COMMAND  						CREATED  			STATUS  			PORTS 						NAMES
 99c28791e53a 		nginx 		"/docker-entrypoint.…" 			55 seconds ago 		Up 53 seconds 		0.0.0.0:55000->80/tcp 		charming_knuth
 
-dali@Mac ~ % curl http://0.0.0.0:55000
+dali@MacBookProDali ~ % curl http://0.0.0.0:55000
 <!DOCTYPE html>
   <html>
     <head>
@@ -866,17 +855,17 @@ Pour arrêter un conteneur, on va utiliser la commande `docker stop <IDContainer
 * Si on fait un `docker ps -a`, on voit qu'il a été arrêté il y a quelques secondes.
 
 ```docker
-dali@Mac ~ % docker ps
+dali@MacBookProDali ~ % docker ps
 CONTAINER ID 		IMAGE 		COMMAND  						CREATED  			STATUS  			PORTS 						NAMES
 99c28791e53a 		nginx 		"/docker-entrypoint.…" 			55 seconds ago 		Up 53 seconds 		0.0.0.0:55000->80/tcp 		charming_knuth
 
-dali@Mac ~ % docker stop 99c28791e53a
+dali@MacBookProDali ~ % docker stop 99c28791e53a
 99c28791e53a
 
-dali@Mac ~ % docker ps
+dali@MacBookProDali ~ % docker ps
 CONTAINER ID IMAGE COMMAND CREATED STATUS  PORTS NAMES
 
-dali@Mac ~ % docker ps -a
+dali@MacBookProDali ~ % docker ps -a
 CONTAINER ID 			IMAGE  		COMMAND  			CREATED 			STATUS 							PORTS  		NAMES
 99c28791e53a 			nginx  		"/docker-…" 		11 minutes ago  	Exited (0) 7 seconds ago  					charming_knuth
 ```
@@ -892,10 +881,10 @@ On va le redémarrer par la commande `docker start <IDContainer>` (ou son nom)
 * On refait un `curl`, sur le port 55001, le serveur Web est à nouveau disponible.
 
 ```docker
-dali@Mac ~ % docker start 99c28791e53a
+dali@MacBookProDali ~ % docker start 99c28791e53a
 99c28791e53a
 
-dali@Mac ~ % docker ps
+dali@MacBookProDali ~ % docker ps
 CONTAINER ID 		IMAGE 		COMMAND  						CREATED  			STATUS  			PORTS 						NAMES
 99c28791e53a 		nginx 		"/docker-entrypoint.…" 			55 seconds ago 		Up 53 seconds 		0.0.0.0:55001->80/tcp 		charming_knuth
 ```
@@ -907,13 +896,13 @@ Si vous faites un `kill -9` vous envoyez le signal **KILL**.
 C'est un **arrêt qui n'est pas propre**, et qui permet en fait d'arrêter une application si elle ne fonctionne pas ou si elle est buggée et elle ne répond pas.
 
 ```docker
-dali@Mac ~ % docker kill 99c28791e53a
+dali@MacBookProDali ~ % docker kill 99c28791e53a
 99c28791e53a
 
-dali@Mac ~ % docker ps
+dali@MacBookProDali ~ % docker ps
 CONTAINER ID IMAGE COMMAND CREATED STATUS  PORTS NAMES
 
-dali@Mac ~ % docker ps -a
+dali@MacBookProDali ~ % docker ps -a
 CONTAINER ID 			IMAGE  		COMMAND  			CREATED 			STATUS 							PORTS  		NAMES
 99c28791e53a 			nginx  		"/docker-…" 		19 minutes ago  	Exited (137) 10 seconds ago  					charming_knuth
 ```
@@ -937,10 +926,10 @@ Pour pouvoir **voir les différentes hiérarchies au sein d'un conteneur**.  Ell
 5. C'est la **hiérarchie principale**.
 
 ```docker
-dali@Mac ~ % docker run -d -ti --name=cont04 --hostname=host04 centos ping 127.0.0.1
+dali@MacBookProDali ~ % docker run -d -ti --name=cont04 --hostname=host04 centos ping 127.0.0.1
 8b348b47461cf301f5ce3d74372473843f4294f38502df66bb89787435c09ad4
 
-dali@Mac ~ % docker exec -it cont04 bash
+dali@MacBookProDali ~ % docker exec -it cont04 bash
 [root@host04 /]# ps -ef
 UID  	PID  	PPID  	C 	STIME 	TTY  		TIME 			CMD
 root 	1 		0  		0 	12:57 	pts/0  		00:00:00 		ping 127.0.0.1
@@ -982,14 +971,14 @@ Ici, le contexte est donc par défaut, conteneur.
 4. Le résultat est sous forme d'un tableau Json, tableau avec attribut/valeur.
 
 ```docker
-dali@Mac ~ % docker run -d -P --name=web05 --hostname=cont05 nginx
+dali@MacBookProDali ~ % docker run -d -P --name=web05 --hostname=cont05 nginx
 1a8f7ba4cf91b19196c3edc783f40f71c9e2da5a17c49f6dba7f7f64295ff3dd
 
-dali@Mac ~ % docker ps
+dali@MacBookProDali ~ % docker ps
 CONTAINER ID 		IMAGE 		COMMAND  			CREATED  		STATUS  		PORTS 						NAMES
 1a8f7ba4cf91 		nginx 		"/docker-entr…" 	23 seconds ago 	Up 22 seconds 	0.0.0.0:55002->80/tcp 		web05
 
-dali@Mac ~ % docker inspect web05 | more
+dali@MacBookProDali ~ % docker inspect web05 | more
 [
   {
    "Id": "1a8f7ba4cf91b19196c3edc783f40f71c9e2da5a17c49f6dba7f7f64295ff3dd",
@@ -1090,7 +1079,7 @@ Par exemple, `docker inspect --format <champsAvisualiser> <container>`
 	* State, on veut visualiser l'attribut Status du conteneur web05: le status est running. `docker inspect --format='{{.State.Status}}' web05`
 
 ```docker
-dali@Mac ~ % docker inspect --format='{{.State.Status}}' web05
+dali@MacBookProDali ~ % docker inspect --format='{{.State.Status}}' web05
 running
 ```
 
@@ -1098,7 +1087,7 @@ running
 	* Nous allons extraire un tableau en entier, en utilisant le **mot-clé json** et en donnant le nom du tableau.
 
 ```docker
-dali@Mac ~ % docker inspect --format='{{json .NetworkSettings}}' web05
+dali@MacBookProDali ~ % docker inspect --format='{{json .NetworkSettings}}' web05
 {"Bridge":"","SandboxID":"6fa73d632416d0f9ec52713b90253a5c4b6c5d5fe7fd037259ec63ed45c5f75f","HairpinMode":false,"LinkLocalIPv6Address":"","LinkLocalIPv6PrefixLen":0,"Ports":{"80/tcp":[{"HostIp":"0.0.0.0","HostPort":"55002"}]},"SandboxKey":"/var/run/docker/netns/6fa73d632416","SecondaryIPAddresses":null,"SecondaryIPv6Addresses":null,"EndpointID":"fed5f919b313124e3457c87cbc28fd82fb29d57a6cc994d6ad75a45a6bf86d6e","Gateway":"172.17.0.1","GlobalIPv6Address":"","GlobalIPv6PrefixLen":0,"IPAddress":"172.17.0.2","IPPrefixLen":16,"IPv6Gateway":"","MacAddress":"02:42:ac:11:00:02","Networks":{"bridge":{"IPAMConfig":null,"Links":null,"Aliases":null,"NetworkID":"3a074d3cb93f120aef82abb1ad7c8ba270111403038dacba94e5b0f11b515856","EndpointID":"fed5f919b313124e3457c87cbc28fd82fb29d57a6cc994d6ad75a45a6bf86d6e","Gateway":"172.17.0.1","IPAddress":"172.17.0.2","IPPrefixLen":16,"IPv6Gateway":"","GlobalIPv6Address":"","GlobalIPv6PrefixLen":0,"MacAddress":"02:42:ac:11:00:02","DriverOpts":null}}}
 ```
 
@@ -1114,7 +1103,7 @@ Nous allons voir en détail comment lister les conteneurs.
 * `docker ps` permet de **lister les conteneurs en cours d'utilisation**: seulement ceux qui sont running (up dans la colonne status)
 
 ```docker
-dali@Mac ~ % docker ps
+dali@MacBookProDali ~ % docker ps
 CONTAINER ID 		IMAGE 		COMMAND  			CREATED  			STATUS  		PORTS 					NAMES
 1a8f7ba4cf91 		nginx 		"/docker-entry…" 	31 minutes ago 		Up 31 minutes 	0.0.0.0:55002->80/tcp 	web05
 ```
@@ -1122,7 +1111,7 @@ CONTAINER ID 		IMAGE 		COMMAND  			CREATED  			STATUS  		PORTS 					NAMES
 * `docker ps -a` permet de **lister tous les conteneurs**, même ceux qui sont terminés. Voilà, on voit ici quelques conteneurs qui sont en exited.
 
 ```docker
-dali@Mac ~ % docker ps -a
+dali@MacBookProDali ~ % docker ps -a
 CONTAINER ID 			IMAGE 		COMMAND  			CREATED  			STATUS  				PORTS 					NAMES
 1a8f7ba4cf91 			nginx 		"/docker-entry…" 	33 minutes ago 		Up 33 minutes 			0.0.0.0:55002->80/tcp 	web05
 8b348b47461c 			centos  	"ping 127.0.0.1" 	42 minutes ago 		Exited (0) 40 minutes ago 						cont04
@@ -1136,7 +1125,7 @@ c1c43fcdb5ed 			ubuntu  	"/bin/bash"  		8 days ago 			Exited (0) 8 days ago 				
 * `docker ps -l` (latest) permet d'afficher uniquement le dernier conteneur créé.
 
 ```docker
-dali@Mac ~ % docker ps -l
+dali@MacBookProDali ~ % docker ps -l
 CONTAINER ID 			IMAGE 		COMMAND  			CREATED  			STATUS  				PORTS 					NAMES
 1a8f7ba4cf91 			nginx 		"/docker-entry…" 	33 minutes ago 		Up 33 minutes 			0.0.0.0:55002->80/tcp 	web05
 ```
@@ -1144,7 +1133,7 @@ CONTAINER ID 			IMAGE 		COMMAND  			CREATED  			STATUS  				PORTS 					NAMES
 * `docker ps --last <nombre>` permet, quand à elle, uniquement de visualiser les n derniers conteneurs.
 
 ```docker
-dali@Mac ~ % docker ps --last 3
+dali@MacBookProDali ~ % docker ps --last 3
 CONTAINER ID 			IMAGE 		COMMAND  			CREATED  			STATUS  				PORTS 					NAMES
 1a8f7ba4cf91 			nginx 		"/docker-entry…" 	33 minutes ago 		Up 33 minutes 			0.0.0.0:55002->80/tcp 	web05
 8b348b47461c 			centos  	"ping 127.0.0.1" 	42 minutes ago 		Exited (0) 40 minutes ago 						cont04
@@ -1155,14 +1144,14 @@ CONTAINER ID 			IMAGE 		COMMAND  			CREATED  			STATUS  				PORTS 					NAMES
 * `docker ps -q` qui permet d'afficher uniquement l'ID des conteneurs en marche, nous pouvons combiner cette option avec d'autres.
 
 ```docker
-dali@Mac ~ % docker ps -q
+dali@MacBookProDali ~ % docker ps -q
 1a8f7ba4cf91
 ```
 
 * option --filter : `docker ps -a --filter name=web`  permet d'afficher tous les conteneurs qui contiennent web dans le nom du conteneur.
 
 ```docker
-dali@Mac ~ % docker ps -a --filter name=web
+dali@MacBookProDali ~ % docker ps -a --filter name=web
 CONTAINER ID 			IMAGE 		COMMAND  			CREATED  			STATUS  				PORTS 					NAMES
 1a8f7ba4cf91 			nginx 		"/docker-entry…" 	33 minutes ago 		Up 33 minutes 			0.0.0.0:55002->80/tcp 	web05
 ```
@@ -1170,7 +1159,7 @@ CONTAINER ID 			IMAGE 		COMMAND  			CREATED  			STATUS  				PORTS 					NAMES
 * `docker ps --filter status=exited`: nous pouvons afficher uniquement les conteneurs d'un certain status.
 
 ```docker
-dali@Mac ~ % docker ps --filter status=exited
+dali@MacBookProDali ~ % docker ps --filter status=exited
 CONTAINER ID 			IMAGE 		COMMAND  			CREATED  			STATUS  				PORTS 					NAMES
 8b348b47461c 			centos  	"ping 127.0.0.1" 	42 minutes ago 		Exited (0) 40 minutes ago 						cont04
 72e895037095 			centos  	"/bin/bash"  		45 minutes ago 		Exited (0) 45 minutes ago 						cont03
@@ -1191,7 +1180,7 @@ CONTAINER ID 			IMAGE 		COMMAND  			CREATED  			STATUS  				PORTS 					NAMES
 * Nous pouvons aussi modifier l'apparence de la sortie standard, et formater suivant les différentes colonnes de la commande docker ps et l'option "--format" qui va utiliser le nom de colonnes `docker ps -a --format "{{.Names}} : {{.Status}}"`
 
 ```docker
-dali@Mac ~ % docker ps -a --format "{{.Names}} : {{.Status}}"
+dali@MacBookProDali ~ % docker ps -a --format "{{.Names}} : {{.Status}}"
 
 web05 : Up 51 minutes
 cont04 : Exited (0) 58 minutes ago
@@ -1209,7 +1198,7 @@ pensive_fermi : Exited (0) 8 days ago
 * Si on souhaite supprimer un conteneur qui est en cours d'exécution, on aura forcément un message d'erreur et, bien sûr, on peut toujours forcer par l'option "-f " pas un arrêt propre, mais il est supprimé. `docker rm -f <nomContainer>`
 
 ```docker
-dali@Mac ~ % docker ps -a
+dali@MacBookProDali ~ % docker ps -a
 CONTAINER ID 			IMAGE 		COMMAND  			CREATED  			STATUS  				PORTS 					NAMES
 1a8f7ba4cf91 			nginx 		"/docker-entry…" 	33 minutes ago 		Up 33 minutes 			0.0.0.0:55002->80/tcp 	web05
 8b348b47461c 			centos  	"ping 127.0.0.1" 	42 minutes ago 		Exited (0) 40 minutes ago 						cont04
@@ -1219,10 +1208,10 @@ e26d2a83a200 			centos  	"ping 127.0.0.1" 	8 days ago 			Exited (0) 8 days ago 	
 c1c43fcdb5ed 			ubuntu  	"/bin/bash"  		8 days ago 			Exited (0) 8 days ago 							funny_mcnulty
 9a210b097f0c 			alpine  	"/bin/sh"  			8 days ago 			Exited (0) 8 days ago 							pensive_fermi
 
-dali@Mac ~ % docker rm pensive_fermi
+dali@MacBookProDali ~ % docker rm pensive_fermi
 pensive_fermi
 
-dali@Mac ~ % docker ps -a
+dali@MacBookProDali ~ % docker ps -a
 CONTAINER ID 			IMAGE 		COMMAND  			CREATED  			STATUS  				PORTS 					NAMES
 1a8f7ba4cf91 			nginx 		"/docker-entry…" 	33 minutes ago 		Up 33 minutes 			0.0.0.0:55002->80/tcp 	web05
 8b348b47461c 			centos  	"ping 127.0.0.1" 	42 minutes ago 		Exited (0) 40 minutes ago 						cont04
@@ -1232,10 +1221,10 @@ e26d2a83a200 			centos  	"ping 127.0.0.1" 	8 days ago 			Exited (0) 8 days ago 	
 c1c43fcdb5ed 			ubuntu  	"/bin/bash"  		8 days ago 			Exited (0) 8 days ago 							funny_mcnulty
 
 
-dali@Mac ~ % docker rm -f web05
+dali@MacBookProDali ~ % docker rm -f web05
 web05
 
-dali@Mac ~ % docker ps -a
+dali@MacBookProDali ~ % docker ps -a
 CONTAINER ID 			IMAGE 		COMMAND  			CREATED  			STATUS  				PORTS 					NAMES
 8b348b47461c 			centos  	"ping 127.0.0.1" 	42 minutes ago 		Exited (0) 40 minutes ago 						cont04
 72e895037095 			centos  	"/bin/bash"  		45 minutes ago 		Exited (0) 45 minutes ago 						cont03
@@ -1249,7 +1238,7 @@ c1c43fcdb5ed 			ubuntu  	"/bin/bash"  		8 days ago 			Exited (0) 8 days ago 				
 	* l'option "q" est pour récupérer automatiquement tous les ID des containers pour pouvoir supprimer tous ceux qui sont dans le status "exited"
 
 ```docker
-dali@Mac ~ % docker ps -a
+dali@MacBookProDali ~ % docker ps -a
 CONTAINER ID 			IMAGE 		COMMAND  			CREATED  			STATUS  				PORTS 					NAMES
 8b348b47461c 			centos  	"ping 127.0.0.1" 	42 minutes ago 		Exited (0) 40 minutes ago 						cont04
 72e895037095 			centos  	"/bin/bash"  		45 minutes ago 		Exited (0) 45 minutes ago 						cont03
@@ -1257,21 +1246,21 @@ CONTAINER ID 			IMAGE 		COMMAND  			CREATED  			STATUS  				PORTS 					NAMES
 e26d2a83a200 			centos  	"ping 127.0.0.1" 	8 days ago 			Exited (0) 8 days ago 							cont02
 c1c43fcdb5ed 			ubuntu  	"/bin/bash"  		8 days ago 			Exited (0) 8 days ago 							funny_mcnulty
 
-dali@Mac ~ % docker ps -aq --filter status=exited
+dali@MacBookProDali ~ % docker ps -aq --filter status=exited
 8b348b47461c
 72e895037095
 99c28791e53a
 e26d2a83a200
 c1c43fcdb5ed
 
-dali@Mac ~ % docker rm $(docker ps -aq --filter status=exited)
+dali@MacBookProDali ~ % docker rm $(docker ps -aq --filter status=exited)
 8b348b47461c
 72e895037095
 99c28791e53a
 e26d2a83a200
 c1c43fcdb5ed
 
-dali@Mac ~ % docker ps -a
+dali@MacBookProDali ~ % docker ps -a
 CONTAINER ID IMAGE COMMAND CREATED STATUS  PORTS NAMES
 ```
 
@@ -1362,7 +1351,7 @@ Nous allons créer une image à partir de la modification d'un conteneur.
 	* l'image est vérifiée
 
 ```docker
-dali@Mac ~ % docker run -it --name=mycentos1 centos
+dali@MacBookProDali ~ % docker run -it --name=mycentos1 centos
 [root@b05430e32e96 /]# yum install -y wget
 
 Failed to set locale, defaulting to C.UTF-8
@@ -1382,11 +1371,11 @@ Try `wget --help' for more options.
 [root@b05430e32e96 /]# exit
 exit
 
-dali@Mac ~ % docker ps -a
+dali@MacBookProDali ~ % docker ps -a
 CONTAINER ID 		IMAGE 		COMMAND 		CREATED 		STATUS  							PORTS 		NAMES
 b05430e32e96 		centos  	"/bin/bash" 	2 minutes ago 	Exited (1) About a minute ago 					mycentos1
 
-dali@Mac ~ % docker images
+dali@MacBookProDali ~ % docker images
 REPOSITORY 	TAG 		IMAGE ID 		CREATED 		SIZE
 ubuntu 		latest  	26b77e58432b 	8 days ago  	72.9MB
 alpine 		latest  	49f356fa4513 	10 days ago 	5.61MB
@@ -1394,17 +1383,17 @@ nginx  		latest  	7ce4f91ef623 	11 days ago 	133MB
 
 
 
-dali@Mac ~ % docker commit mycentos1 masociete/moncentos:1.0
+dali@MacBookProDali ~ % docker commit mycentos1 masociete/moncentos:1.0
 sha256:f373c842872febe3c8c1c524cca0c1ee051a9a0312e5537dc8690a072ac1a090
 
-dali@Mac ~ % docker images
+dali@MacBookProDali ~ % docker images
 REPOSITORY 				TAG 		IMAGE ID 		CREATED 		SIZE
 masociete/moncentos  	1.0 		f373c842872f 	5 seconds ago 	242MB
 ubuntu 					latest  	26b77e58432b 	8 days ago  	72.9MB
 alpine 					latest  	49f356fa4513 	10 days ago 	5.61MB
 nginx  					latest  	7ce4f91ef623 	11 days ago 	133MB
 
-dali@Mac ~ % docker diff mycentos1
+dali@MacBookProDali ~ % docker diff mycentos1
 C /etc
 C /etc/ld.so.cache
 A /etc/wgetrc
@@ -1436,17 +1425,17 @@ C /var/log
 > La bonne pratique étant de créer un dossier par image ou un dossier par projet.
 
 ```bash
-dali@Mac DOCKER % mkdir DockerFiles
-dali@Mac DOCKER % cd DockerFiles
-dali@Mac DockerFiles % mkdir monPremierDockerFile
-dali@Mac DockerFiles % ll
+dali@MacBookProDali DOCKER % mkdir DockerFiles
+dali@MacBookProDali DOCKER % cd DockerFiles
+dali@MacBookProDali DockerFiles % mkdir monPremierDockerFile
+dali@MacBookProDali DockerFiles % ll
 total 0
 3500845 0 drwxrwxrwx  1 dali  staff 264B  1 mai 11:36 .
 3500023 0 drwxrwxrwx  1 dali  staff 264B  1 mai 11:34 ..
 3500846 0 drwxrwxrwx  1 dali  staff 264B  1 mai 11:36 monPremierDockerFile
-dali@Mac DockerFiles % cd monPremierDockerFile
-dali@Mac monPremierDockerFile % touch Dockerfile
-dali@Mac monPremierDockerFile % ll
+dali@MacBookProDali DockerFiles % cd monPremierDockerFile
+dali@MacBookProDali monPremierDockerFile % touch Dockerfile
+dali@MacBookProDali monPremierDockerFile % ll
 total 0
 3500846 0 drwxrwxrwx  1 dali  staff 264B  1 mai 11:37 .
 3500845 0 drwxrwxrwx  1 dali  staff 264B  1 mai 11:36 ..
@@ -1461,7 +1450,7 @@ total 0
 	* Elle permet, d'installer des logiciels, des libraries ou de faire des modifications dans les fichiers de config.
 	* Par exemple, on va faire un `yum install -y wget`.
 ```bash
-dali@Mac monPremierDockerFile % nano Dockerfile
+dali@MacBookProDali monPremierDockerFile % nano Dockerfile
 ```
 ```dockerfile
 FROM centos
@@ -1474,7 +1463,7 @@ RUN yum install -y wget
 	* "masociete/mycentos:1.0" pour choisir l'image à créer
 	* "." le répertoire dans lequel se situe le fichier docker fichier (ici le répertoire courant)
 ```docker
-dali@Mac monPremierDockerFile % docker build -t masociete/mycentosdockerfile:1.0 .
+dali@MacBookProDali monPremierDockerFile % docker build -t masociete/mycentosdockerfile:1.0 .
 
 [+] Building 20.6s (6/6) FINISHED
 => [internal] load build definition from Dockerfile  										0.1s
@@ -1507,7 +1496,7 @@ RUN yum install -y zip
 5. Nous exécutons la commande build mais cette fois-ci, en rajoutant une version supplémentaire.  `docker build -t masociete/mycentosdockerfile:1.1 .`
 
 ```docker
-dali@Mac monPremierDockerFile % docker build -t masociete/mycentosdockerfile:1.1 .
+dali@MacBookProDali monPremierDockerFile % docker build -t masociete/mycentosdockerfile:1.1 .
 [+] Building 3.0s (7/7) FINISHED
 => [internal] load build definition from Dockerfile  									   	0.1s
 => => transferring dockerfile: 101B  														0.0s
@@ -1532,7 +1521,7 @@ dali@Mac monPremierDockerFile % docker build -t masociete/mycentosdockerfile:1.1
 > * Chaque ligne du fichier Dockerfile correspond à une couche au niveau de l'image finale.
 > * On voit bien qu'il y a une nouvelle image en version 1.1.
 ```docker
-dali@Mac monPremierDockerFile % docker images
+dali@MacBookProDali monPremierDockerFile % docker images
 REPOSITORY 						TAG 	IMAGE ID 		CREATED  			SIZE
 masociete/mycentosdockerfile 	1.1 	e8de9b4c39e7 	6 minutes ago  		257MB
 masociete/mycentosdockerfile 	1.0 	ff95b95ed1d1 	14 minutes ago 		242MB
@@ -1542,7 +1531,7 @@ masociete/moncentos  			1.0 	f373c842872f 	2 weeks ago  		242MB
 ##### Connaitre les différentes couches: `docker history <nomImage>`
 [références commandes docker history](https://docs.docker.com/engine/reference/commandline/history/)
 ```docker
-dali@Mac monPremierDockerFile % docker history masociete/mycentosdockerfile:1.1
+dali@MacBookProDali monPremierDockerFile % docker history masociete/mycentosdockerfile:1.1
 IMAGE  			CREATED  			CREATED BY  										SIZE  		COMMENT
 e8de9b4c39e7 	8 minutes ago  		RUN /bin/sh -c yum install -y zip # buildkit  		14.5MB  	buildkit.dockerfile.v0
 <missing>  		17 minutes ago 		RUN /bin/sh -c yum install -y wget # buildkit 		32.8MB  	buildkit.dockerfile.v0
@@ -1635,9 +1624,6 @@ RUN apt-get update -y && \
 ```
 
 
-=============================================
-
-
 #### Liste des instructions dockerfile
 
 -   **FROM**  : Définit l'image de base qui sera utilisée par les instructions suivantes.
@@ -1724,24 +1710,74 @@ WORKDIR  ${DOCUMENTROOT}
 EXPOSE 80/tcp
 EXPOSE 80/udp
 ```
--   **VOLUMES**  : Crée un point de montage qui permettra de persister les données
-**Syntaxe**:
+-   **VOLUMES**  : Crée un point de montage qui permettra de persister les données. Il contient un nom spécifique qui permet de déterminer les volumes montés en externe à partir de l'hôte natif ou d'autres conteneurs. Il peut-être un fichier json `VOLUME ["/var/log/"]` ou une liste de volumes `VOLUME /var/log /var/db`.
+**Syntaxe**: `VOLUME ["/data"]`
+```dockerfile
+FROM ubuntu
+RUN mkdir /myvol
+RUN echo "hello world" > /myvol/greeting
+VOLUME /myvol
+```
 
 -   **USER**  : Désigne quel est l'utilisateur qui lancera les prochaines instructions  RUN,  CMD  ou  ENTRYPOINT  (par défaut c'est l'utilisateur root).
-**Syntaxe**:
+**Syntaxe**: `USER <user>[:<group>]` ou `USER <UID>[:<GID>]`
+```dockerfile
+FROM microsoft/windowsservercore
+# Create Windows user in the container
+RUN net user /add patrick
+# Set it for subsequent commands
+USER patrick
+```
 
-- **ONBUILD** :
-**Syntaxe**:
+- **ONBUILD** : Ajoute à l'image une instruction de déclenchement à exécuter ultérieurement, lorsque l'image est utilisée comme base pour une autre construction. Le déclencheur sera exécuté dans le contexte de la construction en aval, comme s'il avait été inséré immédiatement après l'instruction _FROM_ dans le Dockerfile en aval
+**Syntaxe**: `ONBUILD <INSTRUCTION>`
+```dockerfile
+ONBUILD ADD . /app/src
+ONBUILD RUN /usr/local/bin/python-build --dir /app/src
+```
+- **STOPSIGNAL** : Définit le signal d'appel système qui sera envoyé au conteneur pour quitter.
+**Syntaxe**: `STOPSIGNAL signal`
 
-- **STOPSIGNAL** :
-**Syntaxe**:
+- **HEALTHCHECK** : Donne les conditions d'un healthcheck sur le containeur.
+**Syntaxe**: `HEALTHCHECK [OPTIONS] CMD command` ou `HEALTHCHECK NONE`
 
-- **HEALTHCHECK** :
-**Syntaxe**:
+Avec les **options**:
+ `--interval=DURATION`  (default:  `30s`)
+`--timeout=DURATION`  (default:  `30s`)
+`--start-period=DURATION`  (default:  `0s`)
+`--retries=N`  (default:  `3`)
 
-- **SHELL** :
-**Syntaxe**:
+Et les **codes retours**:
+`0`: success - the container is healthy and ready for use
+`1`: unhealthy - the container is not working correctly
+`2`: reserved - do not use this exit code
 
+```dockerfile
+HEALTHCHECK --interval=5m --timeout=3s \
+  CMD curl -f http://localhost/ || exit 1
+```
+
+- **SHELL** : Permet de remplacer le shell par défaut utilisé pour la forme shell des commandes. Très utile sous windows qui a 2 types de shell: `cmd`et `powershell`
+**Syntaxe**: `SHELL ["executable", "parameters"]`
+
+```dockerfile
+FROM microsoft/windowsservercore
+
+# Executed as cmd /S /C echo default
+RUN echo default
+
+# Executed as cmd /S /C powershell -command Write-Host default
+RUN powershell -command Write-Host default
+
+# Executed as powershell -command Write-Host hello
+SHELL ["powershell", "-command"]
+RUN Write-Host hello
+
+# Executed as cmd /S /C echo hello
+SHELL ["cmd", "/S", "/C"]
+RUN echo hello
+```
+[références Best pratices Dockerfile](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/)
 
 ### Créer une image à partir d'une archive
 
@@ -1815,7 +1851,7 @@ libpsl-0.20.2-6.el8.x86_64 publicsuffix-list-dafsa-20180723-1.el8.noarch wget-1.
 Complete!
 ```
 4. On vérifie que wget s'est bien installé puis on arrête le conteneur. `wget`; `
-exit``
+exit`
 ```docker
 [root@b947ddfae667 /]# wget
 wget: missing URL
@@ -1826,86 +1862,100 @@ exit
 5. On vérifie que le conteneur est bien arrêté. `docker ps -a`
 ```docker
 dali@Mac ~ % docker ps -a
-CONTAINER ID 		IMAGE  		COMMAND  		CREATED  			STATUS 					PORTS 		NAMES
-b947ddfae667 		centos 		"/bin/bash"  	19 minutes ago 		Exited (127) 6 seconds ago 			contempo
-3f84592783a1 		mdalifol/monalpine:1.0 		"/bin/sh"  			2 days ago Exited (0) 2 days ago  	laughing_stonebraker
-9dfbaee47d70 		alpine 		"/bin/sh"  		2 days ago Exited (0) 2 days ago  	monAlpine1
-fb09d3bb4c69 		ae2feff98a0c 		"/docker-entrypoint.…" 		4 weeks ago  Exited (255) 4 weeks ago 	0.0.0.0:55000->80/tcp 		kind_agnesi
-616f5f4121a1 		ubuntu 		"ps" 	5 weeks ago  Exited (0) 5 weeks ago 	charming_kalam
-97372c0e8f7a 		alpine 		"/bin/sh"  5	 weeks ago  Exited (0) 5 weeks ago 	infallible_lewin
-3d027cac3c6f 		alpine/git 		"git clone https://g…" 	5 weeks ago  Exited (0) 5 weeks ago 		repo
+CONTAINER ID 		IMAGE  					COMMAND  					CREATED  				STATUS 							PORTS 							NAMES
+b947ddfae667 		centos 					"/bin/bash"  				19 minutes ago 			Exited (127) 6 seconds ago 										contempo
+3f84592783a1 		mdalifol/monalpine:1.0 	"/bin/sh"  					2 days ago 				Exited (0) 2 days ago  											laughing_stonebraker
+9dfbaee47d70 		alpine 					"/bin/sh"  					2 days ago 				Exited (0) 2 days ago  											monAlpine1
+fb09d3bb4c69 		ae2feff98a0c 			"/docker-entrypoint.…" 		4 weeks ago  			Exited (255) 4 weeks ago 		0.0.0.0:55000->80/tcp 			kind_agnesi
+616f5f4121a1 		ubuntu 					"ps" 						5 weeks ago  			Exited (0) 5 weeks ago 											charming_kalam
+97372c0e8f7a 		alpine 					"/bin/sh"  					5 weeks ago  			Exited (0) 5 weeks ago 											infallible_lewin
+3d027cac3c6f 		alpine/git 				"git clone https://g…" 		5 weeks ago  			Exited (0) 5 weeks ago 											repo
 ```
 6. On crée une archive à partir de ce conteneur `docker export -o moncentos.tar contempo`
 	* `o` comme output
 	* `moncentos.tar`, c'est une archive de type tar
 	* on donne le nom du conteneur `contempo`
 7. On vérifie qu'on a bien un fichier tar qui a été créé. `ls`
-```docker
-
+```bash
+dali@MacBookProDali % ls
+moncentos.tar
 ```
 8. On peut même vérifier et voir son contenu, par la commande `tar tvf moncentos.tar` .
 	* c'est l'ensemble des fichiers du conteneur qui a été archivé dans ce fichier.
 	* Pour une question pratique, on va pouvoir compresser le fichier en question.
-```docker
-
+```bash
+[root@b947ddfae667 /] # tar tvf moncentos.tar
+-rwxr-xr-x  0 0  0 0 31 mai 21:55 .dockerenv
+lrwxrwxrwx  0 0  0 0  3 nov  2020 bin -> usr/bin
+drwxr-xr-x  0 0  0 0 31 mai 21:55 dev/
+-rwxr-xr-x  0 0  0 0 31 mai 21:55 dev/console
+drwxr-xr-x  0 0  0 0 31 mai 21:55 dev/pts/
+drwxr-xr-x  0 0  0 0 31 mai 21:55 dev/shm/
+drwxr-xr-x  0 0  0 0 31 mai 21:56 etc/
+-rw-------  0 0  0 0  4 déc 18:37 etc/.pwd.lock
+-rw-r--r--  0 0  0  14  4 déc 18:37 etc/BUILDTIME
+-rw-r--r--  0 0  0  94 11 mai  2019 etc/GREP_COLORS
+...
 ```
 9. On va pouvoir compresser ce fichier par la commande : `gzip moncentos.tar`
-```docker
 
-```
 10. On vérifie `ls`, Il est compressé
-```docker
-
+```bash
+[root@b947ddfae667 /] # gzip moncentos.tar
+[root@b947ddfae667 /] # ls
+moncentos.tar.gz
 ```
 11. On va pouvoir l'envoyer par internet, le transférer... sur une autre machine. `scp moncentos.tar.gz centos2:`
-```docker
+```bash
+[root@b947ddfae667 /] # scp moncentos.tar.gz centos2:
 
+#connexion sur centos2
+[root@7b9cbf855e65 /]# ls
+moncentos.tar.gz
 ```
-12. On va basculer sur l'autre machine.
+12. On vérifie qu'on n'a pour l'instant, aucune image (`docker images`), et on va extraire à partir de l'archive, et générer une nouvelle image.
 ```docker
-
+dali@MacBookProDali % docker images
+REPOSITORY TAG IMAGE ID CREATED SIZE
 ```
-13. On vérifie sur cette nouvelle machine qu'on a bien récupéré le fichier `ls`
-```docker
-
-```
-14. On vérifie qu'on n'a pour l'instant, aucune image (`docker images`), et on va extraire à partir de l'archive, et générer une nouvelle image.
-```docker
-
-```
-15. On va utiliser la commande inverse qui est la `commande import`. `docker import moncentos.tar.gz masociete/moncentos:1.0`
+13. On va utiliser la commande inverse qui est la `commande import`. `docker import moncentos.tar.gz masociete/moncentos:1.0`
 	* la syntaxe étant `docker import <nomArchive> <nomImageAGenerer>`
 ```docker
-
+[root@7b9cbf855e65 /]# docker import moncentos.tar.gz masociete/moncentos:1.0
+sha256:e8de9b4c39e7....
 ```
-16. On vérifie si l'image a été créée. `docker images`
+14. On vérifie si l'image a été créée. `docker images`
 ```docker
-
+dali@MacBookProDali % docker images
+REPOSITORY 						TAG 	IMAGE ID 		CREATED 		SIZE
+masociete/moncentos 			1.O 	e8de9b4c39e7 	4 weeks ago 	257MB
 ```
-17. Notre image est disponible.
-18. On va tester cette nouvelle image par l'exécution d'un conteneur, par la commande `docker run -it <nomImageGeneree>`, soit `docker run -it masociete/moncentos:1.0 bash`
+15. Notre image est disponible.
+16. On va tester cette nouvelle image par l'exécution d'un conteneur, par la commande `docker run -it <nomImageGeneree>`, soit `docker run -it masociete/moncentos:1.0 bash`
 ```docker
-
+dali@MacBookProDali %  docker run -it masociete/moncentos:1.0 bash
 ```
-19. on vérifie si wget est bien présent. `wget`
+17. on vérifie si wget est bien présent. `wget`
+```bash
+[root@7b9cbf855e65 /]# wget
+wget: missing URL
+Usage: wget [OPTION]...  [URL]...
+```
+18. On sort. `exit`
+
+19. On peut vérifier que le conteneur s'est bien lancé, par la commande `docker ps -a`
 ```docker
-
+dali@MacBookProDali % docker images
+REPOSITORY 						TAG 	IMAGE ID 		CREATED 					SIZE
+masociete/moncentos 			1.O 	e8de9b4c39e7 	Exited (1) 5 seconds ago 	257MB
 ```
-20. On sort. `exit`
+20. On va utiliser la commande `history` pour voir le contenu de l'image. `docker history masociete/moncentos:1.0`
 ```docker
-
+dali@MacBookProDali % docker history masociete/moncentos:1.0
+IMAGE 				CREATED 		CREATED BY 		SIZE		COMMENT
+e8de9b4c39e7		4 weeks ago 					257MB		Imported from -
 ```
-
-21. On peut vérifier que le conteneur s'est bien lancé, par la commande `docker ps -a`
-```docker
-
-```
-22. On va utiliser la commande `history` pour voir le contenu de l'image. `docker history masociete/moncentos:1.0`
-
-```docker
-
-```
-24. Il n'y a plus de notion de couches.
+21. Il n'y a plus de notion de couches.
 	* Rappelez-vous, avec le Dockerfile, on avait la couche de base qui était centos, et ensuite, les couches lorsqu'on a rajouté des composants, lorsqu'on a fait par exemple un `yum install`.
 	* Lorsqu'on extrait une archive et on crée une image, l'image en question ne contient qu'une seule couche, car la création de l'archive s'est effectuée au niveau fichier, et donc il n'y a pas de notion de couches.
 
