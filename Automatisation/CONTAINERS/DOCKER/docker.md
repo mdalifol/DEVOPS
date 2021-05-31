@@ -318,7 +318,6 @@ centos/nginx-110-centos7 Platform for running nginx 1.10 or building … 0
 
 
 [réferences commande docker search](https://docs.docker.com/engine/reference/commandline/search/)
-<<<<<<< HEAD
 
 * Par exemple, l'image « nginx ». « nginx » étant l'image d'une application de type serveur Web ou serveur proxy, qui est une application open source.
 * La colonne **NAME** nous donne le **nom de l'image**.
@@ -329,8 +328,6 @@ centos/nginx-110-centos7 Platform for running nginx 1.10 or building … 0
 * La colonne **STARS** donne la **renommée de l'image**.
 * La colonne **OFFICIAL** pour voir **si l'image est officielle**:  **[OK]**
 * La colonne **AUTOMATED** pour savoir **si l'image est générée de manière automatique** grâce à un gestionnaire de code source, par exemple GitHub ou BitBucket.
-=======
-	 
 	 * Par exemple, l'image « nginx ». « nginx » étant l'image d'une application de type serveur Web ou serveur proxy, qui est une application open source.
 	 * La colonne **NAME** nous donne le **nom de l'image**.
 		 * Si nous avons un nom sans préfixe, ça veut dire que l'image est associée à un éditeur, que c'est une image officielle, et elle se trouve sur ce qu'on appelle le namespace [root].
@@ -340,7 +337,7 @@ centos/nginx-110-centos7 Platform for running nginx 1.10 or building … 0
 	 * La colonne **STARS** donne la **renommée de l'image**.
 	 * La colonne **OFFICIAL** pour voir **si l'image est officielle**:  **[OK]**
 	 * La colonne **AUTOMATED** pour savoir **si l'image est générée de manière automatique** grâce à un gestionnaire de code source, par exemple GitHub ou BitBucket.
->>>>>>> a7d1d3f676f9661608804f55064399f5f1747995
+
 
 
 3. Pour **télécharger une image**, la commande `docker pull <nomImage>`
